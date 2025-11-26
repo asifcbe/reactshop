@@ -1,0 +1,3 @@
+Firebase
+--> initializeApp -- initializes initializes app
+--> getAuth --> this is authentication
