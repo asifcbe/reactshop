@@ -8,7 +8,6 @@ import {
 import FormInput from "../../components/forminput/FormInput";
 import "./sign-in-up-form.styles.scss";
 import Button from "../../components/button/button.component";
-import { UserContext } from "../../contexts/UserContext";
 
 const defaultFormFields = {
   email: "",
@@ -17,12 +16,8 @@ const defaultFormFields = {
 function SignIn() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const { setCurrentUser } = useContext(UserContext);
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
-
-    setCurrentUser(user);
+    await signInWithGooglePopup(); 
   };
   const submitHandler = async (event) => {
     try {
