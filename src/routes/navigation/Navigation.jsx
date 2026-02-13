@@ -4,12 +4,16 @@ import "./navigation.styles.scss";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { signOutUser } from "../../utils/firebaseutils";
+import CartIcon from "../../components/carticon/CartIcon";
+import CartDropDown from "../../components/cartdropdown/CartDropDown";
+import { CartContext } from "../../contexts/CartContext";
 function Navigation() {
   const { currentUser } = useContext(UserContext);
+  const {isCartOpen}=useContext(CartContext);
+  
   const signOutHandler = async () => {
     await signOutUser();
   };
-  console.log("Current User in Navigation:", currentUser);
   return (
     <>
       <div className="navigation">
@@ -29,8 +33,12 @@ function Navigation() {
               SIGN IN
             </Link>
           )}
+          <CartIcon/>
         </div>
+  
+        {isCartOpen&&<CartDropDown />}
       </div>
+
       <Outlet />
     </>
   );
